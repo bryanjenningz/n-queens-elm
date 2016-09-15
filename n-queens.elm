@@ -77,23 +77,31 @@ viewBoard board =
         div [] <|
           List.map
             (\i ->
-              span [tileStyle <| isEven (i + j)] <|
-                [ text <|
-                  if Array.get j board == Just i then
-                    "♛"
-                  else
-                    "."
-                ]
+              let
+                isQueen = Array.get j board == Just i
+              in
+                span [tileStyle (isEven (i + j)) isQueen] <|
+                  [ text <|
+                    if isQueen then
+                      "♛"
+                    else
+                      "."
+                  ]
             )
             [0..(Array.length board - 1)]
       )
       [0..(Array.length board - 1)]
 
 
-tileStyle isWhite =
+tileStyle isWhiteTile isQueen =
   style
-    [ ("color", if isWhite then "black" else "white")
-    , ("background-color", if isWhite then "white" else "black")
+    [ ("color"
+      , if isWhiteTile then
+          if isQueen then "black" else "white"
+        else
+          if isQueen then "white" else "black"
+      )
+    , ("background-color", if isWhiteTile then "white" else "black")
     , ("width", "50px")
     , ("height", "50px")
     , ("display", "inline-block")
@@ -169,4 +177,3 @@ hasConflict newRow newCol solution =
     )
     False
     [0..(newRow - 1)]
-
