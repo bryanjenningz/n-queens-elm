@@ -25,7 +25,7 @@ type alias Model =
 
 
 init =
-  (Model 4 False (initBoards 4) 0, Cmd.none)
+  (Model 8 True (initBoards 8) 0, Cmd.none)
 
 
 subscriptions model =
@@ -54,12 +54,15 @@ getBoard model =
 view model =
   div []
     [ div []
-      [ button [onClick StartStop]
+      [ button 
+        [ onClick StartStop ]
         [ text (if model.started then "Stop" else "Start") ]
       ]
     , div [] 
       [ select
-        [ onInput ChangeWidth ]
+        [ onInput ChangeWidth
+        , value (toString model.width)
+        ]
         (List.map (\x -> option [value (toString x)] [text (toString x)]) [4..8])
       ]
     , viewBoard <| getBoard model
