@@ -52,7 +52,8 @@ getBoard model =
 
 
 view model =
-  div []
+  div
+    [ containerStyle ]
     [ div []
       [ button 
         [ onClick StartStop ]
@@ -94,6 +95,11 @@ viewBoard board =
             [0..(Array.length board - 1)]
       )
       [0..(Array.length board - 1)]
+
+
+containerStyle =
+  style
+    [ ("text-align", "center") ]
 
 
 tileStyle isWhiteTile isQueen =
