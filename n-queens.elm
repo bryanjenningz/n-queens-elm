@@ -106,6 +106,9 @@ tileStyle isWhiteTile isQueen =
     , ("height", "50px")
     , ("display", "inline-block")
     , ("text-align", "center")
+    , ("border", "1px solid black")
+    , ("line-height", "50px")
+    , ("font-size", "30px")
     ]
 
 
